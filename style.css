@@ -1,0 +1,189 @@
+body{
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Fixed header styles - always visible, background changes on scroll */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background-color: transparent; /* Start with transparent background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+}
+
+.header-scrolled {
+    background-color: rgba(0, 0, 0, 0.7); 
+}
+
+.site-header .logo {
+    height: 60px;
+    width: auto;
+    max-width: 200px;
+}
+
+.site-header .logo img {
+    height: 100%;
+    width: auto;
+}
+
+/* Navbar styles */
+.navbar {
+    display: flex;
+    gap: 15px;
+}
+
+.navbar .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar .nav-links li a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.navbar .nav-links li a:hover {
+    background-color: rgba(240, 240, 240, 0.5);
+}
+
+/* back-image background container */
+.back-image-background {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+.back-image-background::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('back-image.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none; /* Allow clicks to go through to content below */
+}
+
+/* Text intro styles */
+.text-intro {
+    position: absolute;
+    top: calc(50% - 130px) ;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    cursor: default;
+    text-align: center;
+    z-index: 2;
+}
+
+.text-cmisp {
+    right: 122px;
+    top: 28px;
+    position: relative;
+    color: white;
+    z-index: 2;
+    overflow: visible;
+}
+.text-diplomatico {
+    color: #ffd344;
+    display: block;
+    text-shadow:  0px 0px 10px #ffd344;
+}
+.button-inscricao {
+    position: absolute;
+    top: calc(50% + 90px);
+    transform: translate(-50%, -50% );
+    left: 50%;
+    z-index: 2;
+    text-align: center;
+}
+.btn-inscricao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    background-color: transparent;
+    border: 1px solid #ffd344;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    gap: 8px;
+}
+.btn-inscricao:hover {
+    background-color: #ffd344;
+    color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 10px #ffd344;
+}
+
+.arrow-btn-inscricao {
+    transition: 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-inscricao:hover .arrow-btn-inscricao {
+    transform: translateX(9px);
+}
+.scroll-indicator {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    z-index: 2;
+    opacity: 0.9;
+    animation: fadeInOut 3s infinite;
+    display: block;
+}
+.scroll-indicator .arrow {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid white;
+    margin: 0 auto 8px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-8px); }
+    60% { transform: translateY(-4px); }
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+/* Content spacing to compensate for fixed header and back-image background */
+.content {
+    margin-top: 0;
+    position: relative;
+    z-index: 1;
+}
