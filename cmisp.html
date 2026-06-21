@@ -10,19 +10,19 @@
 </head>
 <body>
     <header class="site-header">
-        <div class="logo"><img src="cmispdiplomatico.png" alt="CMISP Diplomatico Logo"></div>
+        <div class="logo"><a href="#top"><img  src="cmispdiplomatico.png" alt="CMISP Diplomatico Logo"></a></div>
+        <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
         <nav class="navbar">
              <ul class="nav-links">
-                <li><a href="">Inicio</a></li>
-                <li><a href="">Sobre Nós</a></li>
-                <li><a href="">Inscrição</a></li>
-                <li><a href="">História</a></li>
-                <li><a href="">Comites</a></li>
-                <li><a href="">Contato</a></li>
+                <li><a href="#sobre-nos">Sobre Nós</a></li>
+                <li><a href="#inscricao">Inscrição</a></li>
+                <li><a href="#historia">História</a></li>
+                <li><a href="#comites">Comites</a></li>
+                <li><a href="#contato">Contato</a></li>
             </ul>
         </nav>
     </header>
-    <div class="back-image-background">
+    <div class="back-image-background" id="top">
         <div class="text-intro">
             <h1><span class="text-cmisp">CMISP</span><span class="text-diplomatico">Diplomático</span></h1>
         </div>
@@ -34,7 +34,7 @@
             <p>Role para mais</p>
         </div>
     </div>
-    <div class="content">
+    <div id="sobre-nos">
         <!-- Page content will go here -->
         <br>
         <br>
@@ -92,6 +92,28 @@
         <br>
         <br>
     </div>
+    <div id="inscricao">
+        <div class="container-info">
+            <!--card that flips when clicked-->
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <h1 id="save-the-date">Salve a Data!</h1>
+                        <p id="click-to-reveal">Clique para revelar</p>
+                    </div>
+                    <div class="card-back">
+                        <h2><span class="friday">21</span> e <span class="saturday">22</span> de agosto</h2>
+                        <p class="friday">sexta-feira -- 14h15 às 18h</p>
+                        <p class="saturday">sábado -- 8h às 13h</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container-inscricao">
+                <h1>Se Inscreva Agora!</h1>
+                <img src="qr-code.png" alt="QR Code para inscrição">
+            </div>
+        </div>
+    </div>
     <script>
         // Header background change - show background when header bottom exits background image
         document.addEventListener('DOMContentLoaded', function() {
@@ -117,6 +139,55 @@
             // Initial check and scroll listener
             handleScroll();
             window.addEventListener('scroll', handleScroll);
+
+            // Card flip animation on click
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.classList.toggle('flipped');
+                });
+            });
+
+            // Mobile menu toggle
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navbar = document.querySelector('.navbar');
+            const navLinks = document.querySelectorAll('.nav-links a');
+
+            if (menuToggle && navbar) {
+                menuToggle.addEventListener('click', function() {
+                    const isOpen = navbar.classList.toggle('open');
+                    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                    menuToggle.textContent = isOpen ? '✕' : '☰';
+                });
+
+                // Close menu when a link is clicked
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        navbar.classList.remove('open');
+                        menuToggle.setAttribute('aria-expanded', 'false');
+                        menuToggle.textContent = '☰';
+                    });
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    const isClickInsideHeader = event.target.closest('.site-header');
+                    if (!isClickInsideHeader && navbar.classList.contains('open')) {
+                        navbar.classList.remove('open');
+                        menuToggle.setAttribute('aria-expanded', 'false');
+                        menuToggle.textContent = '☰';
+                    }
+                });
+
+                // Reset menu state when resizing back to desktop
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768) {
+                        navbar.classList.remove('open');
+                        menuToggle.setAttribute('aria-expanded', 'false');
+                        menuToggle.textContent = '☰';
+                    }
+                });
+            }
         });
     </script>
 </body>
